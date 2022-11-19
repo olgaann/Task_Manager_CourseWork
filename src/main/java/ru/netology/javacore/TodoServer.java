@@ -33,16 +33,29 @@ public class TodoServer {
                     String jsonString = in.readLine();
                     request = gson.fromJson(jsonString, Request.class);
 
-                    switch (request.getType()) {
-                        case ADD:
-                            todos.addTask(request.getTask());
-                            break;
-                        case REMOVE:
-                            todos.removeTask(request.getTask());
-                            break;
+
+                    try {
+                        switch (request.getType()) {
+                            case ADD:
+                                todos.addTask(request.getTask());
+                                break;
+                            case REMOVE:
+                                todos.removeTask(request.getTask());
+                                break;
+                            case RESTORE:
+                                todos.restoreLastAction();
+                                break;
+                        }
+                    } catch (NullPointerException e) {
+                        System.out.println("null в запросе");
+                        out.println(todos.getAllTasks());
+                        //out.println(todos.actionsStack);
+                        continue;
                     }
 
+
                     out.println(todos.getAllTasks());
+                    //out.println(todos.actionsStack);
 
                 }
             }

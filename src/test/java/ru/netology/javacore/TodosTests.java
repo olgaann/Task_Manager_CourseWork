@@ -2,8 +2,7 @@ package ru.netology.javacore;
 
 import org.junit.jupiter.api.*;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class TodosTests {
 
@@ -44,4 +43,16 @@ public class TodosTests {
         Assertions.assertEquals(expected, testTodos.getAllTasks());
     }
 
+
+    @DisplayName("Тестирование метода restoreLastAction()")
+    @Test
+    void restoreLastActionTest() {
+        testTodos.restoreLastAction();
+        testTodos.restoreLastAction();
+        testTodos.restoreLastAction();
+        testTodos.restoreLastAction();
+        String expected = "е З м";
+
+        Assertions.assertEquals(expected, testTodos.getAllTasks());
+    }
 }

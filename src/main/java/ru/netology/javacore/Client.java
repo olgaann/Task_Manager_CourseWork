@@ -16,8 +16,9 @@ public class Client {
 
     public static void main(String[] args) { // клиентская часть
 
-        Request request = new Request(Type.ADD, "Пойти в магазин");
-        //Request request = new Request(Type.REMOVE, "Гулять");
+        Request request = new Request(Type.ADD, "Первая");
+        //Request request = new Request(Type.REMOVE, "Вторая");
+        //Request request = new Request(Type.RESTORE);
         try (Socket clientSocket = new Socket(HOST, PORT);
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
@@ -26,6 +27,7 @@ public class Client {
             out.println(gson.toJson(request));
 
             System.out.println("Ответ сервера: " + in.readLine());
+            //System.out.println("В стеке: " + in.readLine());
 
         } catch (IOException e) {
             throw new RuntimeException(e);
